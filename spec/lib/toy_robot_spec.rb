@@ -25,7 +25,7 @@ describe ToyRobot do
     expect(ToyRobot.read(file)).to eq(["move", "left", "right", "right", ["PLACE", 0, 2, "NORTH"], "move", "move", "move", "move", "move", "move", "move", "move", "right", "move", "left", "left", "REPORT"])
   end
 
-  it { should respond_to(:place) }
+  it { should respond_to(:place).with(3).arguments }
   it { should respond_to(:move) }
   it { should respond_to(:left) }
   it { should respond_to(:right) }
