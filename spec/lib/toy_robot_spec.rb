@@ -24,4 +24,10 @@ describe ToyRobot do
     file = "examples/example_d.md"
     expect(ToyRobot.read(file)).to eq(["move", "left", "right", "right", ["PLACE", 0, 2, "NORTH"], "move", "move", "move", "move", "move", "move", "move", "move", "right", "move", "left", "left", "REPORT"])
   end
+
+  it { should respond_to(:place) }
+  it { should respond_to(:move) }
+  it { should respond_to(:left) }
+  it { should respond_to(:right) }
+  it { should respond_to(:report) }
 end
