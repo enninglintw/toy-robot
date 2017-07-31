@@ -1,0 +1,2 @@
+describe ToyRobot do
+end
