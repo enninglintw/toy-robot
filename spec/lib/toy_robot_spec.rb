@@ -30,4 +30,7 @@ describe ToyRobot do
   it { should respond_to(:left) }
   it { should respond_to(:right) }
   it { should respond_to(:report) }
+  it { should respond_to(:x) }
+  it { should respond_to(:y) }
+  it { should respond_to(:f) }
 end
