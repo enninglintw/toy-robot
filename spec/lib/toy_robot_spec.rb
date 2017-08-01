@@ -108,4 +108,56 @@ describe ToyRobot do
       end
     end
   end
+
+  describe '#report' do
+    context 'after initialized' do
+      it 'returns nil' do
+        expect(toy_robot.report).to be_nil
+      end
+    end
+
+    context 'after placed' do
+      before { toy_robot.place(x, y, f) }
+
+      context 'x, y, f are all valid' do
+        let(:x) { rand(x_units) }
+        let(:y) { rand(y_units) }
+        let(:f) { directions.sample }
+
+        it 'returns position x, y, f' do
+          expect(toy_robot.report).to eq("#{x},#{y},#{f}")
+        end
+      end
+
+      context 'any of x, y, f is invalid' do
+        context 'x is invalid' do
+          let(:x) { -2 }
+          let(:y) { rand(y_units) }
+          let(:f) { directions.sample }
+
+          it 'returns nil' do
+            expect(toy_robot.report).to be_nil
+          end
+        end
+        context 'y is invalid' do
+          let(:x) { rand(x_units) }
+          let(:y) { 12 }
+          let(:f) { directions.sample }
+
+          it 'returns nil' do
+            expect(toy_robot.report).to be_nil
+          end
+        end
+        context 'f is invalid' do
+          let(:x) { rand(x_units) }
+          let(:y) { rand(y_units) }
+          let(:f) { "SOUTHWEST" }
+
+          it 'returns nil' do
+            expect(toy_robot.report).to be_nil
+          end
+        end
+      end
+    end
+  end
 end
