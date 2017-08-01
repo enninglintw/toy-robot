@@ -127,6 +127,32 @@ describe ToyRobot do
         it 'returns position x, y, f' do
           expect(toy_robot.report).to eq("#{x},#{y},#{f}")
         end
+
+        context 'after placed again' do
+          before { toy_robot.place(new_x, new_y, new_f) }
+
+          context 'new_x, new_y, new_f are all valid' do
+            let(:new_x) { rand(x_units) }
+            let(:new_y) { rand(y_units) }
+            let(:new_f) { directions.sample }
+
+            it 'returns position new_x, new_y, new_f' do
+              expect(toy_robot.report).to eq("#{new_x},#{new_y},#{new_f}")
+            end
+          end
+
+          context 'any of new_x, new_y, new_f is invalid' do
+            context 'new_x is invalid' do
+              let(:new_x) { -2 }
+              let(:new_y) { rand(y_units) }
+              let(:new_f) { directions.sample }
+
+              it 'returns position x, y, f' do
+                expect(toy_robot.report).to eq("#{x},#{y},#{f}")
+              end
+            end
+          end
+        end
       end
 
       context 'any of x, y, f is invalid' do
@@ -137,6 +163,32 @@ describe ToyRobot do
 
           it 'returns nil' do
             expect(toy_robot.report).to be_nil
+          end
+
+          context 'after placed again' do
+            before { toy_robot.place(new_x, new_y, new_f) }
+
+            context 'new_x, new_y, new_f are all valid' do
+              let(:new_x) { rand(x_units) }
+              let(:new_y) { rand(y_units) }
+              let(:new_f) { directions.sample }
+
+              it 'returns position new_x, new_y, new_f' do
+                expect(toy_robot.report).to eq("#{new_x},#{new_y},#{new_f}")
+              end
+            end
+
+            context 'any of new_x, new_y, new_f is invalid' do
+              context 'new_x is invalid' do
+                let(:new_x) { -2 }
+                let(:new_y) { rand(y_units) }
+                let(:new_f) { directions.sample }
+
+                it 'returns nil' do
+                  expect(toy_robot.report).to be_nil
+                end
+              end
+            end
           end
         end
         context 'y is invalid' do
