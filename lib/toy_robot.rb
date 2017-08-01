@@ -11,7 +11,7 @@ class ToyRobot
     end.compact
   end
 
-  def place
+  def place(x, y, f)
   end
 
   def move
