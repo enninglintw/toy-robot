@@ -5,18 +5,23 @@ describe ToyRobot do
     expect(ToyRobot).to respond_to(:read).with(1).argument
   end
 
-  it 'should read example_a.md, and return an array' do
+  it 'should read example_a.md, and return an array with commands and args' do
     file = "examples/example_a.md"
-    expect(ToyRobot.read(file)).to eq(["PLACE 0,0,NORTH", "MOVE", "REPORT"])
+    expect(ToyRobot.read(file)).to eq([["PLACE", 0, 0, "NORTH"], "MOVE", "REPORT"])
   end
 
-  it 'should read example_b.md, and return an array' do
+  it 'should read example_b.md, and return an array with commands and args' do
     file = "examples/example_b.md"
-    expect(ToyRobot.read(file)).to eq(["PLACE 0,0,NORTH", "LEFT", "REPORT"])
+    expect(ToyRobot.read(file)).to eq([["PLACE", 0, 0, "NORTH"], "LEFT", "REPORT"])
   end
 
-  it 'should read example_c.md, and return an array' do
+  it 'should read example_c.md, and return an array with commands and args' do
     file = "examples/example_c.md"
-    expect(ToyRobot.read(file)).to eq(["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"])
+    expect(ToyRobot.read(file)).to eq([["PLACE", 1, 2, "EAST"], "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"])
+  end
+
+  it 'should read example_d.md, and return an array with commands and args' do
+    file = "examples/example_d.md"
+    expect(ToyRobot.read(file)).to eq(["move", "left", "right", "right", ["PLACE", 0, 2, "NORTH"], "move", "move", "move", "move", "move", "move", "move", "move", "right", "move", "left", "left", "REPORT"])
   end
 end
