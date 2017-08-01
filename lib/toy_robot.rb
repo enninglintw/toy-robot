@@ -11,6 +11,8 @@ class ToyRobot
     end.compact
   end
 
+  attr_accessor :x, :y, :f
+
   def place(x, y, f)
   end
 
