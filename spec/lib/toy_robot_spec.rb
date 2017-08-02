@@ -294,4 +294,98 @@ describe ToyRobot do
       end
     end
   end
+
+  describe '#move' do
+    context 'after placed' do
+      before { toy_robot.place(x, y, f) }
+
+      context 'facing NORTH' do
+        let(:f) { "NORTH" }
+
+        context 'on the NORTH border' do
+          let(:x) { rand(x_units) }
+          let(:y) { (0...y_units).max }
+
+          it 'does not move' do
+            expect { toy_robot.move }.to_not change { toy_robot.y }
+          end
+        end
+
+        context 'not on the NORTH border' do
+          let(:x) { rand(x_units) }
+          let(:y) { rand(y_units - 1) }
+
+          it 'moves one unit to NORTH' do
+            expect { toy_robot.move }.to change { toy_robot.y }.by(1)
+          end
+        end
+      end
+
+      context 'facing EAST' do
+        let(:f) { "EAST" }
+
+        context 'on the EAST border' do
+          let(:x) { (0...x_units).max }
+          let(:y) { rand(y_units) }
+
+          it 'does not move' do
+            expect { toy_robot.move }.to_not change { toy_robot.x }
+          end
+        end
+
+        context 'not on the EAST border' do
+          let(:x) { rand(x_units - 1) }
+          let(:y) { rand(y_units) }
+
+          it 'moves one unit to EAST' do
+            expect { toy_robot.move }.to change { toy_robot.x }.by(1)
+          end
+        end
+      end
+
+      context 'facing SOUTH' do
+        let(:f) { "SOUTH" }
+
+        context 'on the SOUTH border' do
+          let(:x) { rand(x_units) }
+          let(:y) { (0...y_units).min }
+
+          it 'does not move' do
+            expect { toy_robot.move }.to_not change { toy_robot.y }
+          end
+        end
+
+        context 'not on the SOUTH border' do
+          let(:x) { rand(x_units) }
+          let(:y) { rand(1...y_units) }
+
+          it 'moves one unit to SOUTH' do
+            expect { toy_robot.move }.to change { toy_robot.y }.by(-1)
+          end
+        end
+      end
+
+      context 'facing WEST' do
+        let(:f) { "WEST" }
+
+        context 'on the WEST border' do
+          let(:x) { (0...x_units).min }
+          let(:y) { rand(y_units) }
+
+          it 'does not move' do
+            expect { toy_robot.move }.to_not change { toy_robot.x }
+          end
+        end
+
+        context 'not on the WEST border' do
+          let(:x) { rand(1...x_units) }
+          let(:y) { rand(y_units) }
+
+          it 'moves one unit to WEST' do
+            expect { toy_robot.move }.to change { toy_robot.x }.by(-1)
+          end
+        end
+      end
+    end
+  end
 end
