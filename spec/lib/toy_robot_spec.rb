@@ -212,4 +212,45 @@ describe ToyRobot do
       end
     end
   end
+
+  describe '#left' do
+    context 'after placed' do
+      let(:x) { rand(x_units) }
+      let(:y) { rand(y_units) }
+
+      before { toy_robot.place(x, y, f) }
+
+      context 'facing NORTH' do
+        let(:f) { "NORTH" }
+
+        it 'faces WEST after turned left' do
+          expect { toy_robot.left }.to change { toy_robot.f }.from("NORTH").to("WEST")
+        end
+      end
+
+      context 'facing WEST' do
+        let(:f) { "WEST" }
+
+        it 'faces SOUTH after turned left' do
+          expect { toy_robot.left }.to change { toy_robot.f }.from("WEST").to("SOUTH")
+        end
+      end
+
+      context 'facing SOUTH' do
+        let(:f) { "SOUTH" }
+
+        it 'faces EAST after turned left' do
+          expect { toy_robot.left }.to change { toy_robot.f }.from("SOUTH").to("EAST")
+        end
+      end
+
+      context 'facing EAST' do
+        let(:f) { "EAST" }
+
+        it 'faces NORTH after turned left' do
+          expect { toy_robot.left }.to change { toy_robot.f }.from("EAST").to("NORTH")
+        end
+      end
+    end
+  end
 end
