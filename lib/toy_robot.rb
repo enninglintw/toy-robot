@@ -4,15 +4,23 @@ class ToyRobot
   DIRECTIONS = %w(NORTH EAST SOUTH WEST)
 
   def self.read(file)
+    puts "# #{File.basename file}"
+    toy_robot = self.new
+
     text = File.open(file).read
-    text.split("\n").map do |command|
+    text.split("\n").each do |command|
       case command
       when /(^MOVE$|^LEFT$|^RIGHT$|^REPORT$)/i
-        $1
+        puts command
+        toy_robot.__send__($1.downcase)
       when /(PLACE)\s*(\d*),\s?(\d*),\s?(NORTH$|EAST$|SOUTH$|WEST$)/i
-        [$1, $2.to_i, $3.to_i, $4]
+        puts command
+        toy_robot.__send__($1.downcase, *[$2.to_i, $3.to_i, $4.upcase])
       end
-    end.compact
+    end
+    puts "=> #{toy_robot.report}"
+    puts "\n"
+    toy_robot.report
   end
 
   attr_accessor :x, :y, :f
