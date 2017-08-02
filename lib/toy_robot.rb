@@ -45,5 +45,8 @@ class ToyRobot
   end
 
   def report
+    return unless @x && @y && @f
+
+    "#{x},#{y},#{f}"
   end
 end
