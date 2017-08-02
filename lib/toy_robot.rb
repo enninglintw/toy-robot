@@ -36,6 +36,14 @@ class ToyRobot
   end
 
   def move
+    return unless @x && @y && @f
+
+    case @f
+    when "NORTH" then @y += 1 unless @y == (0...Y_UNITS).max
+    when "EAST"  then @x += 1 unless @x == (0...X_UNITS).max
+    when "SOUTH" then @y -= 1 unless @y == (0...Y_UNITS).min
+    when "WEST"  then @x -= 1 unless @x == (0...X_UNITS).min
+    end
   end
 
   def left
