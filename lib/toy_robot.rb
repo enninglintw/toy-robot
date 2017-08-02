@@ -39,6 +39,9 @@ class ToyRobot
   end
 
   def left
+    return unless @f
+
+    @f = DIRECTIONS[(DIRECTIONS.index(@f) - 1) % DIRECTIONS.count]
   end
 
   def right
